@@ -1,7 +1,12 @@
 package org.example;
 
+import org.example.CRUD.CrudCustomer;
+import org.example.CRUD.CrudReports;
+import org.example.CRUD.CrudTickets;
 import org.example.dataSeeder.DataSeed;
 import org.example.tables.*;
+import org.example.transactions.BuyTicket;
+import org.example.transactions.ReserveTicket;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -29,12 +34,26 @@ public class Main {
 
         sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
+//
+//       Transaction tx = session.beginTransaction();
+//        DataSeed.seedCustomers(session);
+//        DataSeed.seedTickets(session);
+//         List<Ticket> ticketList =  CrudTickets.allAvailableTickets(session);
+//
+//         Ticket.printTickets(ticketList);
+//        List<Customer> customers = CrudCustomer.allCustomers(session);
+//        Customer.printCustomers(customers);
+        Customer customer = session.get(Customer.class, 1);
+        Ticket ticket = session.get(Ticket.class, 1);
+//        ReserveTicket.reserve(session, customer, ticket);
+      //  BuyTicket.buy(session,List.of(ticket), customer);
 
-        Transaction tx = session.beginTransaction();
-
-        DataSeed.seedCustomers(session);
-        DataSeed.seedTickets(session);
-        tx.commit();
+//        List<Ticket> tickets = CrudTickets.getPurchasedTickets(session,customer);
+//        Ticket.printTickets(tickets);
+  //     Long x = CrudReports.amountOfSoldTicketsLast7Days(session);
+        Long x = CrudReports.totalRevenueLast7Days(session);
+        System.out.println(x);
+//     tx.commit();
 
 
         session.close();

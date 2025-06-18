@@ -2,12 +2,15 @@ package org.example.transactions;
 
 import jakarta.persistence.OptimisticLockException;
 import org.example.tables.Customer;
+import org.example.tables.Log;
 import org.example.tables.Reserve;
 import org.example.tables.Ticket;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+
 // rezerwacja jest dokonywana wtedy gdy uzytkownik dodaje bilet do koszyka i jest aktywna przez 20 min
 public class ReserveTicket {
     public static void reserve(Session session, Customer customer, Ticket t) {
@@ -39,7 +42,8 @@ public class ReserveTicket {
                 ticket.setReserved(true);
                 Reserve reserve = new Reserve(customer, t);
                 session.persist(reserve);
-
+                Log log = new Log(new Date(),"RESERVE",customer);
+                session.persist(log);
                 tx.commit();
                 System.out.println("Bilet zarezerwowany pomyślnie");
             } catch (OptimisticLockException e) {

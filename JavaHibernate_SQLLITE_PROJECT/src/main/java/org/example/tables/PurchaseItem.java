@@ -12,5 +12,10 @@ public class PurchaseItem {
     private Purchase purchase;
     @ManyToOne
     private Ticket ticket;
-    private int quantity;
+
+    public PurchaseItem() {}
+    public PurchaseItem(Purchase purchase, Ticket ticket) {
+        this.purchase = purchase;
+        this.ticket = ticket;
+    }
 }

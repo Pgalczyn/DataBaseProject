@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.List;
+
 @Entity
 public class Customer {
     @Id
@@ -24,5 +26,22 @@ public class Customer {
         this.surname = surname;
         this.email = email;
         this.password = password;
+    }
+
+    public void printCustomer() {
+        System.out.printf(
+                "ID: %d, Username: %s, Firstname: %s, Surname: %s, Email: %s%n",
+                id, username, firstname, surname, email
+        );
+    }
+
+    public static void printCustomers(List<Customer> customers) {
+        for (Customer c : customers) {
+            c.printCustomer();
+        }
+    }
+
+    public int getId() {
+        return id;
     }
 }

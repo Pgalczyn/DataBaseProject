@@ -19,8 +19,6 @@ public class Reserve {
     private LocalDateTime reservationTime;
     private LocalDateTime expirationTime;
 
-    private boolean isActive;
-
     public Reserve() {}
 
     public Reserve(Customer customer, Ticket ticket) {

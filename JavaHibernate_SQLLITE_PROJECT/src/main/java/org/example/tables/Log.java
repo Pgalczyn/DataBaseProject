@@ -12,7 +12,14 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private Date date;
-    @OneToMany
-    private List<Customer> customerList = new ArrayList<>();
+    @ManyToOne
+    private Customer customer;
     private String action;
+
+    public Log() {}
+    public Log(Date date, String action, Customer customer) {
+        this.date = date;
+        this.action = action;
+        this.customer = customer;
+    }
 }
