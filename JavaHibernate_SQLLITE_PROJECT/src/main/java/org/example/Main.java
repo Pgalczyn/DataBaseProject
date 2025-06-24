@@ -35,26 +35,24 @@ public class Main {
         sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
 //
-//       Transaction tx = session.beginTransaction();
+      Transaction tx = session.beginTransaction();
 //        DataSeed.seedCustomers(session);
 //        DataSeed.seedTickets(session);
-//         List<Ticket> ticketList =  CrudTickets.allAvailableTickets(session);
-//
-//         Ticket.printTickets(ticketList);
+         List<Ticket> ticketList =  CrudTickets.allAvailableTickets(session);
+         Ticket.printTickets(ticketList);
 //        List<Customer> customers = CrudCustomer.allCustomers(session);
 //        Customer.printCustomers(customers);
-        Customer customer = session.get(Customer.class, 1);
-        Ticket ticket = session.get(Ticket.class, 1);
+//        Customer customer = session.get(Customer.class, 1);
+//        Ticket ticket = session.get(Ticket.class, 1);
 //        ReserveTicket.reserve(session, customer, ticket);
       //  BuyTicket.buy(session,List.of(ticket), customer);
 
 //        List<Ticket> tickets = CrudTickets.getPurchasedTickets(session,customer);
 //        Ticket.printTickets(tickets);
   //     Long x = CrudReports.amountOfSoldTicketsLast7Days(session);
-        Long x = CrudReports.totalRevenueLast7Days(session);
-        System.out.println(x);
-//     tx.commit();
-
+//        Long x = CrudReports.totalRevenueLast7Days(session);
+//        System.out.println(x);
+     tx.commit();
 
         session.close();
     }
